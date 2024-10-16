@@ -1,4 +1,4 @@
-const API_BASE_URL = window.API_BASE_URL || 'http://localhost:3000';
+const API_BASE_URL = window.API_BASE_URL || 'https://six5010659-assignment2.onrender.com';
 
 let currentPage = 1;
 const pageSize = 20;
