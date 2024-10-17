@@ -3,8 +3,8 @@ const API_BASE_URL = window.API_BASE_URL || 'https://six5010659-assignment2.onre
 let currentPage = 1;
 const pageSize = 20;
 
-// ฟังก์ชันสำหรับโหลด Drone Config
-async function loadDroneConfig() {
+// ฟังก์ชันสำหรับโหลด Drone Config ทั้งหมดหรือกรองตาม drone_id
+async function loadDroneConfig(searchId = '') {
     const configTableBody = document.getElementById('config-table').getElementsByTagName('tbody')[0];
     configTableBody.innerHTML = ''; // เคลียร์ข้อมูลก่อนโหลดใหม่
 
@@ -15,7 +15,11 @@ async function loadDroneConfig() {
         }
         const configs = await response.json();
 
-        configs.forEach(config => {
+        // กรองข้อมูลตาม drone_id ถ้ามีการค้นหา
+        const filteredConfigs = searchId ? configs.filter(config => config.drone_id.toString().includes(searchId)) : configs;
+
+        // แสดงข้อมูลในตาราง
+        filteredConfigs.forEach(config => {
             const rowHTML = `
                 <tr>
                     <td>${config.drone_id}</td>
@@ -32,6 +36,12 @@ async function loadDroneConfig() {
         configTableBody.innerHTML = '<tr><td colspan="6">Error loading config</td></tr>';
         console.error('Error fetching drone config:', error);
     }
+}
+
+// ฟังก์ชันสำหรับการค้นหา drone_id
+function searchDroneConfig() {
+    const searchId = document.getElementById('search-drone-id').value;
+    loadDroneConfig(searchId); // โหลดข้อมูลตามคำค้นหา
 }
 
 // ฟังก์ชันสำหรับการ summit ข้อมูลอุณหภูมิ
