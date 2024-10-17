@@ -19,6 +19,8 @@
 
     <section id="drone-config" class="content-section">
         <h1>Drone Config</h1>
+        <input type="text" id="search-drone-id" placeholder="Search by Drone ID" />
+        <button onclick="searchDroneConfig()">Submit</button>
         <table id="config-table">
             <thead>
                 <tr>
@@ -35,7 +37,6 @@
             </tbody>
         </table>
     </section>
-
     <section id="temperature-log" class="content-section">
         <h1>Submit Temperature Log</h1>
         <form id="temperature-log-form">
